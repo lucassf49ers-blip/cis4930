@@ -4,6 +4,7 @@ const intensityValue = document.getElementById("intensityValue");
 const loadingEl = document.getElementById("loading");
 const responseEl = document.getElementById("response");
 const responsePanel = document.getElementById("response-panel");
+const emptyState = document.querySelector(".empty-state");
 
 const levelEl = document.getElementById("response-level");
 const sourceEl = document.getElementById("response-source");
@@ -48,19 +49,24 @@ form?.addEventListener("submit", async (event) => {
 });
 
 function toggleLoading(isLoading) {
-  document.querySelector(".empty-state")?.classList.toggle("hidden", isLoading);
-  loadingEl.classList.toggle("hidden", !isLoading);
-  responseEl.classList.toggle("hidden", true);
+  if (isLoading) {
+    emptyState?.classList.add("hidden");
+    responseEl.classList.add("hidden");
+    loadingEl.classList.remove("hidden");
+    return;
+  }
+  loadingEl.classList.add("hidden");
 }
 
 function renderResponse(data) {
   loadingEl.classList.add("hidden");
-  document.querySelector(".empty-state")?.classList.add("hidden");
+  emptyState?.classList.add("hidden");
 
   levelEl.textContent = `${data.level || "unknown"} level`;
   sourceEl.textContent = data.source === "gemini" ? "Gemini" : "Rule engine";
-  titleEl.textContent = data.multimedia?.headline || "Guidance ready";
-  bodyEl.textContent = data.multimedia?.body || "";
+  titleEl.textContent = data.reassurance || data.multimedia?.headline || "Gemini guidance";
+  bodyEl.textContent =
+    data.reasoning || data.multimedia?.body || "Here are a few small steps to focus on next.";
 
   if (data.multimedia?.imageUrl) {
     imageEl.src = data.multimedia.imageUrl;
@@ -139,6 +145,7 @@ function populateResources(listNode, resources) {
 function showError(message) {
   loadingEl.classList.add("hidden");
   responseEl.classList.add("hidden");
+  emptyState?.classList.remove("hidden");
   const alert = document.createElement("div");
   alert.className = "breathing-guide";
   alert.style.borderColor = "rgba(237, 100, 166, 0.8)";
