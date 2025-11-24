@@ -10,6 +10,9 @@ const sourceEl = document.getElementById("response-source");
 const titleEl = document.getElementById("response-title");
 const bodyEl = document.getElementById("response-body");
 const imageEl = document.getElementById("response-image");
+const carePlanEl = document.getElementById("care-plan");
+const careReassuranceEl = document.getElementById("care-reassurance");
+const careReasoningEl = document.getElementById("care-reasoning");
 const microList = document.getElementById("micro-step-list");
 const breathingContainer = document.getElementById("breathing-guides");
 const resourceList = document.getElementById("resource-list");
@@ -61,6 +64,18 @@ function renderResponse(data) {
   sourceEl.textContent = data.source === "gemini" ? "Gemini" : "Rule engine";
   titleEl.textContent = data.multimedia?.headline || "Guidance ready";
   bodyEl.textContent = data.multimedia?.body || "";
+
+  if (carePlanEl && careReassuranceEl && careReasoningEl) {
+    const hasCareText = Boolean(data.reassurance || data.reasoning);
+    carePlanEl.classList.toggle("hidden", !hasCareText);
+    if (hasCareText) {
+      careReassuranceEl.textContent =
+        data.reassurance ||
+        "Thanks for sharing honestly. Let’s take the next small step together.";
+      careReasoningEl.textContent = data.reasoning || "";
+      careReasoningEl.classList.toggle("hidden", !data.reasoning);
+    }
+  }
 
   if (data.multimedia?.imageUrl) {
     imageEl.src = data.multimedia.imageUrl;

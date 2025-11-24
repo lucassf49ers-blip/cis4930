@@ -106,6 +106,16 @@ textarea {
   font-family: inherit;
 }
 
+select {
+  background: #f6f7fb;
+  color: #05060a;
+}
+
+select option {
+  color: #05060a;
+  background: #f6f7fb;
+}
+
 textarea {
   resize: vertical;
 }
@@ -207,6 +217,27 @@ input[type="range"] {
   margin-top: 0;
   font-size: 2rem;
   font-family: "Space Grotesk", sans-serif;
+}
+
+.care-plan {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.care-plan h3 {
+  margin: 0 0 0.35rem;
+}
+
+.care-plan p {
+  margin: 0.35rem 0 0;
+}
+
+.care-note {
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 
 .image-wrap {
