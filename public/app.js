@@ -13,6 +13,10 @@ const imageEl = document.getElementById("response-image");
 const microList = document.getElementById("micro-step-list");
 const breathingContainer = document.getElementById("breathing-guides");
 const resourceList = document.getElementById("resource-list");
+const aiResponseEl = document.getElementById("ai-response");
+const aiResponseLabel = document.getElementById("ai-response-label");
+const reassuranceEl = document.getElementById("response-reassurance");
+const reasoningEl = document.getElementById("response-reasoning");
 
 intensityInput?.addEventListener("input", (event) => {
   intensityValue.textContent = event.target.value;
@@ -51,6 +55,8 @@ function toggleLoading(isLoading) {
   document.querySelector(".empty-state")?.classList.toggle("hidden", isLoading);
   loadingEl.classList.toggle("hidden", !isLoading);
   responseEl.classList.toggle("hidden", true);
+  aiResponseEl?.classList.add("hidden");
+  reasoningEl?.classList.add("hidden");
 }
 
 function renderResponse(data) {
@@ -73,6 +79,23 @@ function renderResponse(data) {
   populateList(microList, data.microSteps || [], "micro");
   populateBreathing(breathingContainer, data.breathing || []);
   populateResources(resourceList, data.multimedia?.resources || []);
+
+  const hasInsight = Boolean(data.reassurance || data.reasoning);
+  if (hasInsight) {
+    aiResponseLabel.textContent =
+      data.source === "gemini" ? "Gemini reflection" : "Care plan reflection";
+    reassuranceEl.textContent =
+      data.reassurance ||
+      "Thanks for sharing honestly. Let’s take the next small step together.";
+    reasoningEl.textContent = data.reasoning || "";
+    reasoningEl.classList.toggle("hidden", !data.reasoning);
+    aiResponseEl.classList.remove("hidden");
+  } else {
+    reassuranceEl.textContent = "";
+    reasoningEl.textContent = "";
+    aiResponseEl.classList.add("hidden");
+    reasoningEl.classList.add("hidden");
+  }
 
   responseEl.classList.remove("hidden");
   responsePanel.scrollIntoView({ behavior: "smooth" });
