@@ -106,6 +106,15 @@ textarea {
   font-family: inherit;
 }
 
+select {
+  background: #ffffff;
+  color: #05060a;
+}
+
+select option {
+  color: #05060a;
+}
+
 textarea {
   resize: vertical;
 }
@@ -187,6 +196,33 @@ input[type="range"] {
   display: flex;
   gap: 0.6rem;
   margin-bottom: 1rem;
+}
+
+.ai-response {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ai-response__label {
+  margin: 0 0 0.35rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.ai-response__reassurance {
+  margin: 0;
+  font-weight: 600;
+}
+
+.ai-response__reasoning {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 
 .pill {
