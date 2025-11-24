@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Future Mood Inference</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__content">
+        <p class="badge">Gemini-backed multimedia support</p>
+        <h1>How are you feeling today?</h1>
+        <p class="lede">
+          Share a few quick details and let the inference engine tailor breathing practices, visuals,
+          and next steps that match your current mood.
+        </p>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel panel--form">
+        <form id="mood-form">
+          <div class="field">
+            <label for="primaryFeeling">Choose the closest option</label>
+            <select id="primaryFeeling" name="primaryFeeling" required>
+              <option value="">Select how you feel</option>
+              <option value="sad">I’ve been really sad</option>
+              <option value="down">I’m just a little down</option>
+              <option value="anxious">I’m feeling anxious</option>
+              <option value="help">HELP – I need urgent support</option>
+              <option value="work_stress">Stressed about work or school</option>
+              <option value="relationship">Friend/relationship problems</option>
+              <option value="sleep">Trouble sleeping</option>
+              <option value="burnout">Burned out / no motivation</option>
+              <option value="happy">I’ve felt genuinely happy lately</option>
+              <option value="self_harm">I’ve had thoughts of self-harm</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <div class="field__label-row">
+              <label for="intensity">How strong is the feeling?</label>
+              <span id="intensityValue">5</span>
+            </div>
+            <input
+              type="range"
+              id="intensity"
+              name="intensity"
+              min="0"
+              max="10"
+              step="1"
+              value="5"
+            />
+            <small>0 = barely there, 10 = the most intense you can imagine</small>
+          </div>
+
+          <div class="field">
+            <label for="daysFeeling">How many days in a row?</label>
+            <input
+              type="number"
+              id="daysFeeling"
+              name="daysFeeling"
+              min="0"
+              max="30"
+              placeholder="e.g. 4"
+            />
+          </div>
+
+          <div class="field">
+            <label for="details">Add any extra details you’d like the AI to consider</label>
+            <textarea
+              id="details"
+              name="details"
+              rows="4"
+              placeholder="I’ve felt overwhelmed with work and my sleep has vanished..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="cta">Generate care plan</button>
+          <p class="disclaimer">
+            This tool is not a replacement for professional therapy. In a crisis, contact emergency
+            services or local hotlines immediately.
+          </p>
+        </form>
+      </section>
+
+      <section class="panel panel--response" id="response-panel">
+        <div class="empty-state">
+          <p>Ready when you are. Share how you feel to unlock tailored guidance.</p>
+        </div>
+        <div class="loading hidden" id="loading">
+          <div class="spinner"></div>
+          <p>Checking in with Gemini...</p>
+        </div>
+        <article class="response hidden" id="response">
+          <div class="response__meta">
+            <span class="pill" id="response-level">Level</span>
+            <span class="pill pill--muted" id="response-source">Source</span>
+          </div>
+          <h2 id="response-title">Headline</h2>
+          <p id="response-body">Body</p>
+          <div class="image-wrap">
+            <img id="response-image" alt="Supportive visual" />
+          </div>
+
+          <div class="micro-steps">
+            <h3>Immediate steps</h3>
+            <ul id="micro-step-list"></ul>
+          </div>
+
+          <div class="breathing">
+            <h3>Breathing or calming practice</h3>
+            <div id="breathing-guides"></div>
+          </div>
+
+          <div class="resources">
+            <h3>Helpful resources</h3>
+            <ul id="resource-list"></ul>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Built for supportive check-ins. Keep breathing, stay hydrated, and lean on your support
+        system.
+      </p>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
