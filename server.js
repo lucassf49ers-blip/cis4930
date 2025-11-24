@@ -97,7 +97,7 @@ const multimediaLibrary = {
     resources: [
       {
         label: "Guided calm visual",
-        url: "https://www.youtube.com/watch?v=aNXKjTFs4ag",
+        url: "https://www.youtube.com/watch?v=92i5m3tV5XY",
       },
       {
         label: "Two-minute grounding audio",
@@ -174,11 +174,11 @@ const multimediaLibrary = {
     resources: [
       {
         label: "10-minute sleep meditation",
-        url: "https://www.youtube.com/watch?v=ZPZQX-6Ig1c",
+        url: "https://www.youtube.com/watch?v=aEqlQvczMJQ",
       },
       {
         label: "Nighttime sky visuals",
-        url: "https://www.youtube.com/watch?v=3NoXThL_afM",
+        url: "https://www.youtube.com/watch?v=1ZYbU82GVz4",
       },
     ],
     breathing: [
