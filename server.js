@@ -368,7 +368,8 @@ app.post("/api/analyze", async (req, res) => {
   });
 });
 
-app.get("*", (_, res) => {
+// Regex avoids Express 5.x path-to-regexp wildcard validation issues.
+app.get(/^(?!\/api).*/, (_, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
